@@ -1,4 +1,4 @@
-# Elasticsearch CLI & API Project
+# Elasticsearch CLI & API 
 
 ## Overview
 
@@ -75,16 +75,12 @@ This tool is ideal for developers who need a lightweight interface for inserting
 
 ### CLI
 
-**Create a new index with mapping**
-
-Ensure the index exists with proper tokenization and analyzers for searchable data.
-
 **Insert data**
 
 ```bash
 esh upload -l mock-data.ndjson
 ```
-
+The upload command automatically creates an index with proper mapping if it doesn't exist. The index name is taken from your environment variables, and the mapping includes tokenization and analyzers optimized for searchable data.
 ### API
 
 **Start the server**
@@ -131,11 +127,3 @@ GET http://localhost:3000/search?term=coffee
 - Response includes `uuid`, `title`, and `abstract` fields from indexed documents
 
 ---
-
-## License
-
-[Add your license information here]
-
-## Contributing
-
-[Add contribution guidelines here]
