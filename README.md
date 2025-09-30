@@ -1,4 +1,4 @@
-# Elasticsearch CLI & API Project
+# Elasticsearch CLI & API 
 
 ## Overview
 
