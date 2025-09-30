@@ -13,7 +13,7 @@ app.get("/", async (req: Request, res: Response) => {
   }
 
   const concept: string = conceptParam;
-  const result = await search("article", concept);
+  const result = await search(concept);
   res.status(200).json(result);
 });
 

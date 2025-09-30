@@ -66,9 +66,9 @@ const bulkInsert = async (documents: Document[]) => {
   }
 }
 
-const search = async (index: string, searchTerm: string) => {
+const search = async (searchTerm: string) => {
   const response = await client.search<ElasticSearchResponse>({
-    index,
+    index: ELASTICSEARCH_INDEX_NAME,
     body: {
       query: {
         function_score: {
