@@ -1,0 +1,59 @@
+{
+    "mappings": {
+        "properties": {
+            "uuid": {
+                "type": "keyword",
+                "ignore_above": 256,
+                "normalizer": "to_lowercase"
+            },
+            "title": {
+                "type": "text",
+                "analyzer": "standard"
+            },
+            "abstract": {
+                "type": "text",
+                "analyzer": "standard"
+            },
+            "tags": {
+                "type": "text",
+                "fields": {
+                    "keyword": {
+                        "type": "keyword",
+                        "ignore_above": 256,
+                        "normalizer": "to_lowercase"
+                    }
+                },
+                "analyzer": "standard"
+            },
+            "relationships": {
+                "type": "nested",
+                "properties": {
+                    "cause_concept_name": {
+                        "type": "keyword",
+                        "ignore_above": 256,
+                        "normalizer": "to_lowercase"
+                    },
+                    "effect_concept_name": {
+                        "type": "keyword",
+                        "ignore_above": 256,
+                        "normalizer": "to_lowercase"
+                    }
+                }
+            }
+        }
+    },
+    "settings": {
+        "index": {
+            "analysis": {
+                "normalizer": {
+                    "to_lowercase": {
+                        "filter": [
+                            "lowercase"
+                        ],
+                        "type": "custom"
+                    }
+                }
+            }
+        }
+    }
+}
