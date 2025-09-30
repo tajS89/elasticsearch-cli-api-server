@@ -50,7 +50,13 @@ This tool is ideal for developers who need a lightweight interface for inserting
    yarn
    ```
 
-3. **Configure environment variables**
+3. **Build and Link CLI Locally**
+   ```bash
+   yarn compile
+   npm link
+   ```
+
+4. **Configure environment variables**
    
    Create a `.env` file with the following configuration:
    ```bash
@@ -64,7 +70,7 @@ This tool is ideal for developers who need a lightweight interface for inserting
    NODE_ENV=development
    ```
 
-4. **Start services using Docker Compose**
+5. **Start services using Docker Compose**
    ```bash
    docker-compose up -d
    ```
