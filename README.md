@@ -131,11 +131,3 @@ GET http://localhost:3000/search?term=your-search-term
 - Response includes `uuid`, `title`, and `abstract` fields from indexed documents
 
 ---
-
-## License
-
-[Add your license information here]
-
-## Contributing
-
-[Add contribution guidelines here]
