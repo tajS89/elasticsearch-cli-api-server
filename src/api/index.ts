@@ -4,8 +4,8 @@ import { SERVER_PORT } from "../config";
 const app = express();
 const port = SERVER_PORT;
 
-app.get("/", async (req: Request, res: Response) => {
-  const conceptParam = req.query.concept;
+app.get("/search", async (req: Request, res: Response) => {
+  const conceptParam = req.query.term;
   if (conceptParam === undefined || typeof conceptParam !== "string") {
     return res.status(400).send({
       error: "Query param 'concept' must be a string",

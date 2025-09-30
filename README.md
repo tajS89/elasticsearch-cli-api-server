@@ -104,7 +104,7 @@ The server will run on the configured port (default: `3000`).
 **Example request:**
 
 ```http
-GET http://localhost:3000/search?term=your-search-term
+GET http://localhost:3000/search?term=coffee
 ```
 
 **Example response:**
