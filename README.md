@@ -2,35 +2,140 @@
 
 ## Overview
 
-This project provides a simple **CLI tool** and a **REST API** to interact with Elasticsearch.  
+This project provides a streamlined **CLI tool** and **REST API** for interacting with Elasticsearch.
 
-- The **CLI** allows you to insert data into an Elasticsearch cluster.  
-- The **API** lets you search the indexed data by search term.  
+- The **CLI** enables bulk data insertion from files into an Elasticsearch cluster
+- The **API** allows you to search indexed data using search terms
 
-It is built to make working with Elasticsearch easier for developers who want a lightweight interface for inserting and querying data.  
+Data is stored in `mock-data.ndjson`, with mapping configuration in `mapping.json`.
+
+This tool is ideal for developers who need a lightweight interface for inserting and querying Elasticsearch data.
 
 ---
 
 ## Features
 
-- **CLI**
-  - Insert data into a specified Elasticsearch index.
-  - Simple commands for adding documents.  
+### CLI
+- Bulk insert data into a default Elasticsearch index
+- Support for both interactive and stateless usage
+- Graceful handling of Elasticsearch connections
+- Rate limiting for bulk insert operations using Redis (default: 5 concurrent requests)
 
-- **API**
-  - Search indexed documents by a search term.
-  - Returns results in JSON format.
+### API
+- Search indexed documents by search term
+- Returns results in JSON format
+- Built with Node.js for easy extension
 
-- **Node.js** based, lightweight and easy to extend.
-- Handles Elasticsearch connections gracefully.
-- Supports interactive and stateless CLI usage.
+---
+
+## Requirements
+
+- Node.js >= 16
+- Yarn
+- Docker & Docker Compose
+- Elasticsearch >= 7.x
 
 ---
 
 ## Installation
 
-1. Clone the repository:
+1. **Clone the repository**
+   ```bash
+   git clone git@github.com:tajS89/elasticsearch-cli-api-server.git
+   cd elasticsearch-cli-api-server
+   ```
+
+2. **Install dependencies**
+   ```bash
+   yarn
+   ```
+
+3. **Configure environment variables**
+   
+   Create a `.env` file with the following configuration:
+   ```bash
+   SERVER_PORT=3000
+   ELASTICSEARCH_HOST=http://localhost:9200
+   ELASTICSEARCH_USERNAME=
+   ELASTICSEARCH_PASSWORD=
+   ELASTICSEARCH_INDEX_NAME=documents
+   REDIS_URL=redis://localhost:6379
+   MAX_CONCURRENT_UPLOAD_REQUESTS=5
+   NODE_ENV=development
+   ```
+
+4. **Start services using Docker Compose**
+   ```bash
+   docker-compose up -d
+   ```
+
+---
+
+## Usage
+
+### CLI
+
+**Create a new index with mapping**
+
+Ensure the index exists with proper tokenization and analyzers for searchable data.
+
+**Insert data**
 
 ```bash
-git clone <your-repo-url>
-cd <repo-folder>
+esh upload -l mock-data.ndjson
+```
+
+### API
+
+**Start the server**
+
+```bash
+npm start server
+```
+
+The server will run on the configured port (default: `3000`).
+
+**Search documents**
+
+- **Endpoint:** `/search`
+- **Method:** `GET`
+- **Query Parameter:** `term` — The search term to query indexed documents
+
+**Example request:**
+
+```http
+GET http://localhost:3000/search?term=your-search-term
+```
+
+**Example response:**
+
+```json
+[
+  {
+    "uuid": "123e4567-e89b-12d3-a456-426614174000",
+    "title": "My document",
+    "abstract": "This is a test abstract",
+    "score": 1.23
+  },
+  {
+    "uuid": "223e4567-e89b-12d3-a456-426614174001",
+    "title": "Another document",
+    "abstract": "Another test abstract",
+    "score": 0
+  }
+]
+```
+
+**Notes:**
+- The `score` field is normalized to `0` if Elasticsearch returns `0.001`
+- Response includes `uuid`, `title`, and `abstract` fields from indexed documents
+
+---
+
+## License
+
+[Add your license information here]
+
+## Contributing
+
+[Add contribution guidelines here]
