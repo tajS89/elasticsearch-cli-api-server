@@ -6,7 +6,7 @@ const port = SERVER_PORT;
 
 app.get("/search", async (req: Request, res: Response) => {
   const conceptParam = req.query.term;
-  if (conceptParam === undefined || typeof conceptParam !== "string") {
+  if (typeof conceptParam !== "string" || conceptParam.trim() === "") {
     return res.status(400).send({
       error: "Query param 'concept' must be a string",
     });
