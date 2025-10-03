@@ -1,7 +1,6 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
-const { defaults: tsjPreset } = require('ts-jest/presets');
 
-module.exports = {
+export default {
   preset: 'ts-jest/presets/default-esm', // handles TS + ESM
   testEnvironment: 'node',
   transform: {

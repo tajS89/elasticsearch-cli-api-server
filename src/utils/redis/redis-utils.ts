@@ -1,4 +1,3 @@
-
 import client from "./client"
 import { MAX_CONCURRENT_UPLOAD_REQUESTS } from "../../config";
 const CONCURRENT_KEY = 'current_requests';
@@ -16,7 +15,7 @@ const tryIncreaseRequestsCounter = async () => {
     return false;
   }
 
-  const res = await client.incr(CONCURRENT_KEY);
+  await client.incr(CONCURRENT_KEY);
   return true;
 }
 

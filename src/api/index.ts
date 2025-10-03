@@ -1,4 +1,4 @@
-import express, { type Request, type Response, type NextFunction } from "express";
+import express, { type Request, type Response } from "express";
 import { search } from "../utils/elasticsearch/elasticsearch-utils";
 import { SERVER_PORT } from "../config";
 const app = express();
@@ -22,7 +22,7 @@ app.use((req: Request, res: Response) => {
 });
 
 app.use(
-  (err: Error, req: Request, res: Response, next: NextFunction) => {
+  (err: Error, req: Request, res: Response) => {
     console.error("Unhandled Error:", err.stack || err);
 
     res.status(500).json({

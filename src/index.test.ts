@@ -1,3 +1,6 @@
+
+import { init } from "./index";
+
 const MockCommand = jest.fn().mockImplementation(() => {
     return {
         name: jest.fn().mockReturnThis(),
@@ -15,7 +18,7 @@ jest.mock("commander", () => {
     return { Command: MockCommand };
 });
 
-let mockFunction = jest.fn();
+const mockFunction = jest.fn();
 
 jest.mock("./utils/commands", () => {
     return {
@@ -57,8 +60,6 @@ describe("init CLI", () => {
     });
 
     test("initializes cli and adds commands", () => {
-
-        const { init } = require("./index");
 
         init();
 

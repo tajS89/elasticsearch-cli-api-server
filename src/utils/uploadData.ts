@@ -34,7 +34,7 @@ async function uploadData(inputFileLocation: string) {
     await bulkInsert(batch);
   }
 
-  //await decreaseRequestsCounter();
+  await decreaseRequestsCounter();
 }
 
 export { uploadData };
