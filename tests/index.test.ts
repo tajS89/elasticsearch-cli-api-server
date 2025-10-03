@@ -1,5 +1,5 @@
 
-import { init } from "./index";
+import { commands } from "./index.data";
 
 const MockCommand = jest.fn().mockImplementation(() => {
     return {
@@ -22,38 +22,14 @@ const mockFunction = jest.fn();
 
 jest.mock("./utils/commands", () => {
     return {
-        commands: [
-            {
-                command: "command",
-                description: "test description",
-                options: [
-                    {
-                        flag: "test flag",
-                        description: "location description",
-                        required: true,
-                    },
-                ],
-
-                action: mockFunction,
-            },
-            {
-                command: "command 2",
-                description: "test description 2",
-                options: [
-                    {
-                        flag: "test flag 2",
-                        description: "location description 2",
-                        required: false,
-                    },
-                ],
-
-                action: mockFunction,
-            },
-        ],
+        commands: commands.map(cmd => ({ ...cmd, action: mockFunction })),
     };
 });
 
+import { init } from "../src/index";
+
 describe("init CLI", () => {
+
     beforeEach(() => {
         jest.resetModules();
         jest.clearAllMocks();
@@ -68,10 +44,10 @@ describe("init CLI", () => {
         // Initialzation of the cli
         const firstInstance = (MockCommand as jest.Mock).mock.results[0].value;
 
-        // Initialization first command with required option
+        // Initialization of first command with required option
         const secondInstance = (MockCommand as jest.Mock).mock.results[1].value;
 
-        // Initialization first command with required option
+        // Initialization of second command without required option
         const thirdInstance = (MockCommand as jest.Mock).mock.results[2].value;
 
         expect(firstInstance.name).toHaveBeenCalledWith("esh");
