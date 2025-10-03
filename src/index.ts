@@ -5,10 +5,7 @@ import { version } from "../package.json";
 import { commands } from "./utils/commands";
 import type { CommandArgs } from "./utils/commands";
 
-
-
-async function init() {
-
+export const init = () => {
   const program: Command = new Command();
   program.name("esh");
   program.description("Elastic search helper CLI");
@@ -30,4 +27,6 @@ async function init() {
   program.parse();
 }
 
-init()
+if (require.main === module) {
+  init();
+}
