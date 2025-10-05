@@ -1,5 +1,5 @@
-import { UploadOption, CommandFunction } from "../utils/commands";
-import { uploadData } from "./../utils/uploadData";
+import { UploadOption, CommandFunction } from "../commands";
+import { uploadData } from "./../../utils/uploadData";
 
 export const upload: CommandFunction<UploadOption> = async (
   option: UploadOption,

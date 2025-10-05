@@ -1,9 +1,11 @@
 #!/usr/bin/env node
-
+import { readFileSync } from "node:fs";
 import { Command } from "commander";
-import { version } from "../package.json";
-import { commands } from "./utils/commands";
-import type { CommandArgs } from "./utils/commands";
+import { commands } from "./commands";
+import type { CommandArgs } from "./commands";
+
+const rootDir = process.cwd();
+const { version } = JSON.parse(readFileSync(`${rootDir}/package.json`, "utf8"));
 
 export const init = () => {
   const program: Command = new Command();

@@ -26,7 +26,7 @@ jest.mock("src/utils/commands", () => {
     };
 });
 
-import { init } from "src/init-cli";
+import { init } from "src/cli/init-cli";
 
 describe("init CLI", () => {
 

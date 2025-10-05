@@ -1,4 +1,4 @@
-import { upload } from "../command/upload";
+import { upload } from "./command/upload";
 
 export type UploadOption = {
   src: string;

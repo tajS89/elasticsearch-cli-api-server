@@ -1,13 +1,13 @@
 {
   "name": "back-end-assignment-ekipo",
   "version": "1.0.0",
-  "main": "lib/init-cli.js",
+  "main": "lib/cli/init-cli.js",
   "type": "commonjs",
   "directories": {
     "lib": "lib"
   },
   "bin": {
-    "esh": "./lib/init-cli.js"
+    "esh": "./lib/cli/init-cli.js"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^7.17.14",
