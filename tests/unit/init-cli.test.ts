@@ -20,7 +20,7 @@ jest.mock("commander", () => {
 
 const mockFunction = jest.fn();
 
-jest.mock("src/utils/commands", () => {
+jest.mock("src/cli/commands", () => {
     return {
         commands: commands.map(cmd => ({ ...cmd, action: mockFunction })),
     };
