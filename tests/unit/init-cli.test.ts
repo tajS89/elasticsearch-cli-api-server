@@ -1,5 +1,5 @@
 
-import { commands } from "./index.data";
+import { commands } from "./init-cli.data";
 
 const MockCommand = jest.fn().mockImplementation(() => {
     return {
@@ -26,7 +26,7 @@ jest.mock("src/utils/commands", () => {
     };
 });
 
-import { init } from "src/index";
+import { init } from "src/init-cli";
 
 describe("init CLI", () => {
 

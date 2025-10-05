@@ -1,13 +1,13 @@
 {
   "name": "back-end-assignment-ekipo",
   "version": "1.0.0",
-  "main": "lib/index.js",
+  "main": "lib/init-cli.js",
   "type": "commonjs",
   "directories": {
     "lib": "lib"
   },
   "bin": {
-    "esh": "./lib/index.js"
+    "esh": "./lib/init-cli.js"
   },
   "dependencies": {
     "@elastic/elasticsearch": "^7.17.14",
@@ -36,8 +36,8 @@
     "test:coverage": "jest --coverage",
     "compile": "npx tsc -p tsconfig.build.json",
     "lint": "eslint",
-    "start-local": "ts-node src/index.ts",
-    "server": "node lib/api/index.js"
+    "start-local-app": "ts-node src/api/server.ts",
+    "server": "node lib/api/server.js"
   },
   "engines": {
     "node": ">=20.18.0",
