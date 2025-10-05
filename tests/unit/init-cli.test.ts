@@ -1,32 +1,17 @@
 
-import { commands } from "./init-cli.data";
-
-const MockCommand = jest.fn().mockImplementation(() => {
-    return {
-        name: jest.fn().mockReturnThis(),
-        description: jest.fn().mockReturnThis(),
-        version: jest.fn().mockReturnThis(),
-        requiredOption: jest.fn().mockReturnThis(),
-        option: jest.fn().mockReturnThis(),
-        action: jest.fn().mockReturnThis(),
-        addCommand: jest.fn().mockReturnThis(),
-        parse: jest.fn().mockReturnThis(),
-    };
-});
+import { commands } from "../data/init-cli-data";
+import { mockCommand, mockFunction } from "./../mocks/init-cli.mock";
+import { init } from "src/cli/init-cli";
 
 jest.mock("commander", () => {
-    return { Command: MockCommand };
+    return { Command: mockCommand };
 });
-
-const mockFunction = jest.fn();
 
 jest.mock("src/cli/commands", () => {
     return {
         commands: commands.map(cmd => ({ ...cmd, action: mockFunction })),
     };
 });
-
-import { init } from "src/cli/init-cli";
 
 describe("init CLI", () => {
 
@@ -39,16 +24,16 @@ describe("init CLI", () => {
 
         init();
 
-        expect(MockCommand).toHaveBeenCalledTimes(3);
+        expect(mockCommand).toHaveBeenCalledTimes(3);
 
         // Initialzation of the cli
-        const firstInstance = (MockCommand as jest.Mock).mock.results[0].value;
+        const firstInstance = (mockCommand as jest.Mock).mock.results[0].value;
 
         // Initialization of first command with required option
-        const secondInstance = (MockCommand as jest.Mock).mock.results[1].value;
+        const secondInstance = (mockCommand as jest.Mock).mock.results[1].value;
 
         // Initialization of second command without required option
-        const thirdInstance = (MockCommand as jest.Mock).mock.results[2].value;
+        const thirdInstance = (mockCommand as jest.Mock).mock.results[2].value;
 
         expect(firstInstance.name).toHaveBeenCalledWith("esh");
         expect(firstInstance.description).toHaveBeenCalledWith("Elastic search helper CLI");

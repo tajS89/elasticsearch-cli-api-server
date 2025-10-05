@@ -1,18 +1,9 @@
+import { esClientMock } from "../../mocks/elasticsearch/elasticsearch-utils.mock";
 import { bulkInsert } from "src/utils/elasticsearch/elasticsearch-utils";
 
 jest.mock("src/utils/elasticsearch/client", () => {
-  return {
-    indices: {
-      exists:
-        jest.fn().mockResolvedValue({ body: false }),
-      create: jest.fn().mockResolvedValue({ body: {} }),
-    },
-    bulk: jest.fn().mockResolvedValue({ body: { errors: false, items: [] } }),
-    search: jest.fn().mockResolvedValue({ body: { hits: { hits: [] } } }),
-  };
+  return esClientMock
 });
-
-
 
 describe("Elasticsearch Utilities", () => {
   beforeEach(() => {
