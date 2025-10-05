@@ -10,6 +10,9 @@ export default {
   },
   extensionsToTreatAsEsm: ['.ts'],
   moduleNameMapper: {
-    '^(\\.{1,2}/.*)\\.js$': '$1', // fixes relative imports for ESM
+    '^src/(.*)$': '<rootDir>/src/$1',
+    '^tests/(.*)$': '<rootDir>/tests/$1'
+
   },
+
 };

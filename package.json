@@ -34,7 +34,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "compile": "npx tsc",
+    "compile": "npx tsc -p tsconfig.build.json",
     "lint": "eslint",
     "start-local": "ts-node src/index.ts",
     "server": "node lib/api/index.js"

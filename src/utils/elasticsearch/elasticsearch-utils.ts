@@ -1,6 +1,6 @@
 import client from './client';
 import { ELASTICSEARCH_INDEX_NAME } from '../../config';
-import mapping from './../../../mapping.json';
+import mapping from './mapping.json';
 
 type Relationship = {
   cause_concept_name: string;
