@@ -20,7 +20,7 @@ describe("init CLI", () => {
         jest.clearAllMocks();
     });
 
-    test("initializes cli and adds commands", () => {
+    test("should initializes cli and adds commands", () => {
 
         init();
 
@@ -41,7 +41,7 @@ describe("init CLI", () => {
         expect(firstInstance.addCommand).toHaveBeenCalledWith(secondInstance);
         expect(firstInstance.parse).toHaveBeenCalled();
 
-        expect(secondInstance.name).toHaveBeenCalledWith("command");
+        expect(secondInstance.name).toHaveBeenCalledWith("upload");
         expect(secondInstance.description).toHaveBeenCalledWith("test description");
         expect(secondInstance.requiredOption).toHaveBeenCalledWith(
             "test flag",
@@ -50,7 +50,7 @@ describe("init CLI", () => {
         expect(secondInstance.action).toHaveBeenCalledWith(mockFunction);
         expect(secondInstance.option).not.toHaveBeenCalled();
 
-        expect(thirdInstance.name).toHaveBeenCalledWith("command 2");
+        expect(thirdInstance.name).toHaveBeenCalledWith("upload");
         expect(thirdInstance.description).toHaveBeenCalledWith("test description 2");
         expect(thirdInstance.requiredOption).not.toHaveBeenCalled();
         expect(thirdInstance.action).toHaveBeenCalledWith(mockFunction);

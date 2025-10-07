@@ -48,18 +48,16 @@ const bulkInsert = async (documents: Document[]) => {
     await createIndexWithMappingIfNotExists();
     const body = documents.flatMap((doc) => [{ index: { _index: ELASTICSEARCH_INDEX_NAME, _id: doc.uuid } }, doc]);
     const resp = await client.bulk({ refresh: true, body })
-
     if (resp.body.errors) {
       for (const item of resp.body.items) {
         const action = Object.keys(item)[0]
         const result = item[action]
         if (result.error) {
-          // Alert: Handle the error appropriately in your application
-          console.error(`Failed [${action}] on _id=${result._id}:`, result.error)
+          console.error(`Failed [${action}] on _id=${result._id}`)
         }
       }
     } else {
-      console.log('All documents indexed successfully')
+      console.info('All documents indexed successfully')
     }
   } catch (error) {
     console.error('Bulk insert error:', error);

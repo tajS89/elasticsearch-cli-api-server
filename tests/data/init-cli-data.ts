@@ -1,6 +1,7 @@
-export const commands = [
+import type { CommandArgs } from "src/cli/commands";
+export const commands: CommandArgs[] = [
     {
-        command: "command",
+        command: "upload",
         description: "test description",
         options: [
             {
@@ -10,10 +11,10 @@ export const commands = [
             },
         ],
 
-        action: () => { }
+        action: (_options: any) => { return Promise.resolve(); }
     },
     {
-        command: "command 2",
+        command: "upload",
         description: "test description 2",
         options: [
             {
@@ -23,6 +24,6 @@ export const commands = [
             },
         ],
 
-        action: () => { },
+        action: (_options: any) => { return Promise.resolve(); }
     },
 ]
