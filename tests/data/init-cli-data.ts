@@ -10,8 +10,7 @@ export const commands: CommandArgs[] = [
                 required: true,
             },
         ],
-
-        action: (_options: any) => { return Promise.resolve(); }
+        action: () => { return Promise.resolve(); }
     },
     {
         command: "upload",
@@ -23,7 +22,6 @@ export const commands: CommandArgs[] = [
                 required: false,
             },
         ],
-
-        action: (_options: any) => { return Promise.resolve(); }
+        action: () => { return Promise.resolve(); }
     },
 ]
