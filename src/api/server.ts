@@ -4,6 +4,20 @@ import { SERVER_PORT } from "../config";
 const app = express();
 const port = SERVER_PORT;
 
+/**
+ * @route GET /search
+ * @description
+ * Searches for articles where the given concept appears as a `cause_concept_name`
+ * in at least one relationship. Boosts article scores if the concept also appears in:
+ *
+ * - `title` (boost: 1.0)
+ * - `tags` (boost: 0.51)
+ * - `abstract` (boost: 0.1)
+ *
+ * Final score is the sum of these boosts. Results are sorted by score in descending order.
+ *
+ * @queryParam {string} term - The concept to search for (e.g., "coffee").
+ */
 app.get("/search", async (req: Request, res: Response) => {
   const conceptParam = req.query.term;
   if (typeof conceptParam !== "string" || conceptParam.trim() === "") {

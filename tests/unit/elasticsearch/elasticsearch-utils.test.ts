@@ -3,12 +3,14 @@ import {
   esClientMockWithIndex,
   esClientMockWithErrors,
   esClientMockWithException,
+  esClientMockSearch
 } from "../../mocks/elasticsearch/elasticsearch-utils.mock";
-import { documents, bulkInsertResponse } from "../../data/elasticsearch/elasticsearch-utils-data";
-import { bulkInsert } from "src/utils/elasticsearch/elasticsearch-utils";
+import { documents, bulkInsertPayload, searchApiResponse } from "../../data/elasticsearch/elasticsearch-utils-data";
+import { bulkInsert, search } from "src/utils/elasticsearch/elasticsearch-utils";
 import { ELASTICSEARCH_INDEX_NAME } from 'src/config';
 import mapping from 'src/utils/elasticsearch/mapping.json';
 import client from "src/utils/elasticsearch/client";
+import { query } from "src/utils/elasticsearch/query";
 jest.mock("src/utils/elasticsearch/client", () => ({
   client: {},
 }));
@@ -63,7 +65,24 @@ describe("Elasticsearch Utilities", () => {
     Object.assign(client, esClientMockWithIndex);
     await bulkInsert(documents);
     expect(esClientMockWithIndex.bulk).toHaveBeenCalled();
-    expect(esClientMockWithIndex.bulk).toHaveBeenCalledWith(bulkInsertResponse);
+    expect(esClientMockWithIndex.bulk).toHaveBeenCalledWith(bulkInsertPayload);
     expect(consoleInfoMock).toHaveBeenCalledWith('All documents indexed successfully');
+  });
+
+
+  test("should return successful response when searching", async () => {
+    Object.assign(client, esClientMockSearch);
+    const response = await search('test');
+    expect(esClientMockSearch.search).toHaveBeenCalled();
+    expect(esClientMockSearch.search).toHaveBeenCalledWith({
+      index: ELASTICSEARCH_INDEX_NAME,
+      body: {
+        query: query('test'),
+        sort: [
+          { _score: { order: "desc" } },
+        ],
+      }
+    });
+    expect(response).toEqual(searchApiResponse);
   });
 });

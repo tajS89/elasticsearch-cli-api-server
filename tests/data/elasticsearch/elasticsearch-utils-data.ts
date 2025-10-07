@@ -1,4 +1,4 @@
-import type { Document } from "src/utils/elasticsearch/elasticsearch-utils";
+import type { Document, SearchApiResponse } from "src/utils/elasticsearch/elasticsearch-utils";
 export const documents: Document[] = [
   {
     uuid: 'uuid-1',
@@ -33,7 +33,7 @@ export const documents: Document[] = [
   }
 ]
 
-export const bulkInsertResponse = {
+export const bulkInsertPayload = {
   "body":
     [{
       "index":
@@ -84,3 +84,18 @@ export const bulkInsertResponse = {
     }],
   "refresh": true
 }
+
+export const searchApiResponse: SearchApiResponse[] = [
+  {
+    uuid: 'uuid-1',
+    title: 'title-1',
+    abstract: 'abstract-1',
+    score: 1.5
+  },
+  {
+    uuid: 'uuid-2',
+    title: 'title-2',
+    abstract: 'abstract-2',
+    score: 1
+  }
+]

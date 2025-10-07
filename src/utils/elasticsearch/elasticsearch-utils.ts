@@ -1,4 +1,5 @@
 import client from './client';
+import { query } from './query';
 import { ELASTICSEARCH_INDEX_NAME } from '../../config';
 import mapping from './mapping.json';
 
@@ -18,7 +19,7 @@ export type Document = {
   relationships: Relationship[];
 };
 
-interface ElasticSearchResponse {
+export type ElasticSearchResponse = {
   hits: {
     hits: Array<{
       _source: Document;
@@ -27,7 +28,7 @@ interface ElasticSearchResponse {
   };
 }
 
-interface SearchApiResponse {
+export type SearchApiResponse = {
   uuid: string;
   title: string;
   abstract: string;
@@ -68,48 +69,7 @@ const search = async (searchTerm: string) => {
   const response = await client.search<ElasticSearchResponse>({
     index: ELASTICSEARCH_INDEX_NAME,
     body: {
-      query: {
-        function_score: {
-          query: {
-            nested: {
-              path: "relationships",
-              query: {
-                term: {
-                  "relationships.cause_concept_name": searchTerm,
-                },
-              },
-            },
-          },
-          functions: [
-            {
-              filter: { term: { title: searchTerm } },
-              weight: 1,
-            },
-            {
-              filter: { term: { tags: searchTerm } },
-              weight: 0.51,
-            },
-            {
-              filter: { term: { abstract: searchTerm } },
-              weight: 0.1,
-            },
-            {
-              filter: {
-                bool: {
-                  must_not: [
-                    { term: { title: searchTerm } },
-                    { term: { tags: searchTerm } },
-                    { term: { abstract: searchTerm } },
-                  ],
-                },
-              },
-              weight: 0.001,
-            },
-          ],
-          score_mode: "sum",
-          boost_mode: "replace",
-        },
-      },
+      query: query(searchTerm),
       sort: [
         { _score: { order: "desc" } },
       ],
