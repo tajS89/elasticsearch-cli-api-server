@@ -1,4 +1,5 @@
-import type { Document, SearchApiResponse } from "src/utils/elasticsearch/elasticsearch-utils";
+import type { Document, ElasticSearchResponse, SearchApiResponse } from "src/utils/elasticsearch/elasticsearch-utils";
+
 export const documents: Document[] = [
   {
     uuid: 'uuid-1',
@@ -83,6 +84,46 @@ export const bulkInsertPayload = {
       "uuid": "uuid-2"
     }],
   "refresh": true
+}
+
+export const esSearchResponse: ElasticSearchResponse = {
+  hits: {
+    hits: [
+      {
+        _source: {
+          uuid: 'uuid-1',
+          title: 'title-1',
+          abstract: 'abstract-1',
+          tags: {
+            main: 'main tag 1',
+            keyword: 'keyword tag 1'
+          },
+          relationships: [
+            { cause_concept_name: 'cause concept name 1', effect_concept_name: 'effect concept name 1' },
+            { cause_concept_name: 'cause concept name 2', effect_concept_name: 'effect concept name 2' }
+          ]
+        },
+        _score: 1.5
+      },
+      {
+        _source: {
+          uuid: 'uuid-2',
+          title: 'title-2',
+          abstract: 'abstract-2',
+          tags: {
+            main: 'main tag 2',
+            keyword: 'keyword tag 2'
+          },
+          relationships: [
+            { cause_concept_name: 'cause concept name 3', effect_concept_name: 'effect concept name 3' },
+            { cause_concept_name: 'cause concept name 4', effect_concept_name: 'effect concept name 4' }
+          ]
+        },
+        _score: 1.0
+      }
+
+    ]
+  }
 }
 
 export const searchApiResponse: SearchApiResponse[] = [
